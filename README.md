@@ -1,2 +1,10 @@
-# CRUD
-Crud basico em PHP
+# CRUD BASICO EM PHP
+Crud basico
+
+PHP 5.6
+
+MYSQL 5.6
+
+JQUERY v1.11.1
+
+AJAX

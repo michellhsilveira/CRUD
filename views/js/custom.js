@@ -68,7 +68,7 @@ function removeEditable(element) {
 
     $('#indicator').show();
 
-    if ($('.current').attr('medico_id') != null){
+    if ($('.current').attr('medico_id') != null) {
 
         var Medico = new Object();
         Medico.id = $('.current').attr('medico_id');
@@ -91,7 +91,7 @@ function removeEditable(element) {
         );
     }
 
-    if ($('.current').attr('paciente_id') != null){
+    if ($('.current').attr('paciente_id') != null) {
         var Paciente = new Object();
         Paciente.id = $('.current').attr('paciente_id');
         Paciente.field = $('.current').attr('field');
@@ -112,7 +112,7 @@ function removeEditable(element) {
             "json"
         );
     }
-    if ($('.current').attr('consulta_id') != null){
+    if ($('.current').attr('consulta_id') != null) {
         var Consulta = new Object();
         Consulta.id = $('.current').attr('consulta_id');
         Consulta.field = $('.current').attr('field');
@@ -182,6 +182,7 @@ function deleteMedico(element) {
         "json"
     );
 }
+
 function deletePaciente(element) {
 
     var Paciente = new Object();
@@ -201,6 +202,7 @@ function deletePaciente(element) {
         "json"
     );
 }
+
 function deleteConsulta(element) {
 
     var Consulta = new Object();
@@ -275,6 +277,7 @@ function getConsultaList(element) {
         "json"
     );
 }
+
 function getConsultaFilter(element) {
 
     $('#indicator').show();
@@ -295,6 +298,7 @@ function getConsultaFilter(element) {
         "json"
     );
 }
+
 // ==================================================
 // FIM GERAR LISTA
 // **************************************************
@@ -307,7 +311,7 @@ function renderPacienteList(jsonData) {
         table += '<tr>';
         table += '<td class="edit" field="name" paciente_id="' + paciente.id + '">' + paciente.name + '</td>';
         table += '<td class="edit" field="email" paciente_id="' + paciente.id + '">' + paciente.email + '</td>';
-        table += '<td><a href="javascript:void(0);" paciente_id="' + paciente.id + '" class="delete_paciente_confirm btn btn-danger"><i class="icon-remove icon-white"></i></a></td>';
+        table += '<td><a href="javascript:void(0);" paciente_id="' + paciente.id + '" class="delete_paciente_confirm btn btn-danger">X</a></td>';
         table += '</tr>';
     });
 
@@ -325,7 +329,7 @@ function renderMedicoList(jsonData) {
         table += '<tr>';
         table += '<td class="edit" field="name" medico_id="' + medico.id + '">' + medico.name + '</td>';
         table += '<td class="edit" field="email" medico_id="' + medico.id + '">' + medico.email + '</td>';
-        table += '<td><a href="javascript:void(0);" medico_id="' + medico.id + '" class="delete_medico_confirm btn btn-danger"><i class="icon-remove icon-white"></i></a></td>';
+        table += '<td><a href="javascript:void(0);" medico_id="' + medico.id + '" class="delete_medico_confirm btn btn-danger">X</a></td>';
         table += '</tr>';
     });
 
@@ -345,21 +349,17 @@ function renderConsultaList(jsonData) {
         table += '<td field="medico_id" consulta_id="' + consulta.id + '">' + consulta.medico + '</td>';
         table += '<td field="paciente_id" consulta_id="' + consulta.id + '">' + consulta.paciente + '</td>';
         table += '<td class="edit" field="data_consulta" consulta_id="' + consulta.id + '">' + consulta.data_consulta + '</td>';
-        table += '<td><a href="javascript:void(0);" consulta_id="' + consulta.id + '" class="delete_consulta_confirm btn btn-danger"><i class="icon-remove icon-white"></i></a></td>';
+        table += '<td><a href="javascript:void(0);" consulta_id="' + consulta.id + '" class="delete_consulta_confirm btn btn-danger">X</a></td>';
         table += '</tr>';
     });
 
     table += '</tbody></table>';
 
-    table += '<div class="input-prepend">';
-    table += '<span class="add-on"><i class="icon-tasks icon-black"></i> Data: </span>';
-    table += '<input type="date" name="data" id="data_consulta_filter" required>';
-    table += '</div><br/><br/>';
-    table += '<div class="control-group">';
-    table += '<div class="">';
-    table += '<button type="button" id="filtrar" class="btn btn-primary"><i class="icon-ok icon-white"></i> Filtrar</button>';
+    table += '<div class="form-group">';
+    table += '<label for="data_consulta_filter">Filtrar data:</label>';
+    table += '<input type="date" class="form-control" name="data" id="data_consulta_filter" required>';
     table += '</div>';
-    table += '</div>';
+    table += '<button type="button" id="filtrar" class="btn btn-primary"> Filtrar</button>';
 
     $('div#content').html(table);
 }
@@ -437,41 +437,31 @@ function addConsulta(element) {
 }
 
 function getCreatePacienteForm(element) {
-    var form = '<div class="input-prepend">';
-    form += '<span class="add-on"><i class="icon-user icon-black"></i> Nome</span>';
-    form += '<input type="text" id="name" name="name" value="" class="input-xlarge" />';
-    form += '</div><br/><br/>';
-
-    form += '<div class="input-prepend">';
-    form += '<span class="add-on"><i class="icon-envelope icon-black"></i> Email</span>';
-    form += '<input type="text" id="email" name="email" value="" class="input-xlarge" />';
-    form += '</div><br/><br/>';
-
-    form += '<div class="control-group">';
-    form += '<div class="">';
-    form += '<button type="button" id="add_paciente" class="btn btn-primary"><i class="icon-ok icon-white"></i> Adicionar Paciente</button>';
+    var form = '<div class="form-group">';
+    form += '<label for="name"> Nome</label>';
+    form += '<input type="text" class="form-control" id="name" name="name" value="" />';
     form += '</div>';
+
+    form += '<div class="form-group">';
+    form += '<label for="email"> Email</label>';
+    form += '<input type="text" class="form-control" id="email" name="email" value="" />';
     form += '</div>';
+    form += '<button type="button" id="add_paciente" class="btn btn-primary"> Adicionar Paciente</button>';
 
     $('div#content').html(form);
 }
 
 function getCreateMedicoForm(element) {
-    var form = '<div class="input-prepend">';
-    form += '<span class="add-on"><i class="icon-user icon-black"></i> Nome</span>';
-    form += '<input type="text" id="name" name="name" value="" class="input-xlarge" />';
-    form += '</div><br/><br/>';
-
-    form += '<div class="input-prepend">';
-    form += '<span class="add-on"><i class="icon-envelope icon-black"></i> Email</span>';
-    form += '<input type="text" id="email" name="email" value="" class="input-xlarge" />';
-    form += '</div><br/><br/>';
-
-    form += '<div class="control-group">';
-    form += '<div class="">';
-    form += '<button type="button" id="add_medico" class="btn btn-primary"><i class="icon-ok icon-white"></i> Adicionar Medico</button>';
+    var form = '<div class="form-group">';
+    form += '<label for="name">Nome</label>';
+    form += '<input type="text" class="form-control" id="name" name="name" value="" />';
     form += '</div>';
+
+    form += '<div class="form-group">';
+    form += '<label for="name">Email</label>';
+    form += '<input type="text" class="form-control" id="email" name="email" value="" />';
     form += '</div>';
+    form += '<button type="button" id="add_medico" class="btn btn-primary"> Adicionar Medico</button>';
 
     $('div#content').html(form);
 }
@@ -479,29 +469,24 @@ function getCreateMedicoForm(element) {
 function getCreateConsultaForm(element) {
 
 
-    var form = '<div class="input-prepend">';
-    form += '<span class="add-on"><i class="icon-user icon-black"></i> Médico: </span>';
-    form += '<select name="medico_id" id="medico_id" class="input-xlarge" required>';
+    var form = '<div class="form-group">';
+    form += '<label for="medico_id">Médico: </label>';
+    form += '<select name="medico_id" id="medico_id" class="form-control" required>';
     form += '</select>';
-    form += '</div><br/><br/>';
+    form += '</div>';
 
-    form += '<div class="input-prepend">';
-    form += '<span class="add-on"><i class="icon-user icon-black"></i> Paciente: </span>';
-    form += '<select name="paciente_id" id="paciente_id" class="input-xlarge" required>';
+    form += '<div class="form-group">';
+    form += '<label for="paciente_id">Paciente: </label>';
+    form += '<select name="paciente_id" id="paciente_id" class="form-control" required>';
     form += '</select>';
-    form += '</div><br/><br/>';
-
-    form += '<div class="input-prepend">';
-    form += '<span class="add-on"><i class="icon-tasks icon-black"></i> Data: </span>';
-    form += '<input type="date" name="data" id="data_consulta" required>';
-    form += '</div><br/><br/>';
-
-
-    form += '<div class="control-group">';
-    form += '<div class="">';
-    form += '<button type="button" id="add_consulta" class="btn btn-primary"><i class="icon-ok icon-white"></i> Adicionar Consulta</button>';
     form += '</div>';
+
+    form += '<div class="form-group">';
+    form += '<label for="date">Data: </label>';
+    form += '<input type="date" name="data" id="data_consulta" class="form-control" required>';
     form += '</div>';
+
+    form += '<button type="button" id="add_consulta" class="btn btn-primary"> Adicionar Consulta</button>';
 
     $('div#content').html(form);
 
@@ -519,7 +504,6 @@ function getCreateConsultaForm(element) {
         },
         "json"
     );
-
 
 
     var pacientes = '<option value="">Selecionar</option>';
